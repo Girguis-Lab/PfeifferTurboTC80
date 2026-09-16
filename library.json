@@ -1,0 +1,39 @@
+{
+  "name": "PfeifferTurboTC80",
+  "version": "1.0.1",
+  "description": "Implements the Pfeiffer Vacuum Protocol over RS-485 serial for Pfeiffer turbomolecular pumps driven by a TC80 electronic drive unit allowing controling and reading parameters of the pump from arduino. It reqires an appropriate RS-485 to TTL converter with DE/RE direction control for Arduino compatibility. Not endorsed by or affiliated with Pfeiffer Vacuum.",
+  "keywords": [
+    "pfeiffer",
+    "turbo-pump",
+    "tc80",
+    "vacuum",
+    "rs485",
+    "serial"
+  ],
+  "authors": [
+    {
+      "name": "Kyle Worcester-Moore",
+      "maintainer": true
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Girguis-Lab/PfeifferTurboTC80.git"
+  },
+  "license": "MIT",
+  "frameworks": "arduino",
+  "platforms": "atmelavr",
+  "headers": "PfeifferTurboTC80.h",
+  "export": {
+    "exclude": [
+      ".github",
+      "docs"
+    ]
+  },
+  "dependencies": [
+    {
+      "name": "RingBufCPP",
+      "version": "https://github.com/wizard97/Embedded_RingBuf_CPP.git#1.3"
+    }
+  ]
+}

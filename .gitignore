@@ -1,0 +1,10 @@
+.DS_Store
+.pio/
+.pioenvs/
+.piolibdeps/
+.vscode/
+!.vscode/extensions.json
+*.o
+*.a
+*.elf
+*.hex

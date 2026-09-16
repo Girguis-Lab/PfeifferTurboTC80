@@ -1,0 +1,102 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    name: Protocol unit tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install PlatformIO
+        run: pip install --upgrade platformio
+      # Pure-logic tests for telegram encoding/decoding and the payload
+      # datatypes. No hardware required.
+      - name: Run tests
+        run: pio test -e native
+
+  build:
+    name: Build examples
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        example:
+          - examples/BasicQuery
+          - examples/NonBlockingLoop
+          # Two translation units both including the library. This is the
+          # regression test for the ODR bugs fixed in 1.0.0 - if the library
+          # ever regains a non-inline function defined in a header, this is
+          # what catches it.
+          - examples/MultipleTranslationUnits
+        flags:
+          # No build flags: logging compiled out, debug tables in. What a
+          # consumer gets by default, so it must build cleanly.
+          - "-Wall -Wextra"
+          # Smallest build: no logging, no human-readable tables. Guards
+          # against debug-only symbols leaking outside their #if.
+          - "-Wall -Wextra -D PFEIFFER_VAC_PROTOCOL_INCLUDE_DEBUG=0"
+          # Logging to a caller-supplied Print/Stream.
+          - "-Wall -Wextra -D PFTC80_LOG_TO_STREAM"
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Cache PlatformIO
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.platformio
+            ~/.cache/pip
+          key: ${{ runner.os }}-pio-${{ hashFiles('library.json') }}
+
+      - name: Install PlatformIO
+        run: pip install --upgrade platformio
+
+      - name: Build ${{ matrix.example }}
+        run: |
+          pio ci --lib=. --board=megaADK \
+            --project-option="build_flags=${{ matrix.flags }}" \
+            ${{ matrix.example }}
+
+  debuglog:
+    name: Build with DebugLog backend
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install PlatformIO
+        run: pip install --upgrade platformio
+      # PFTC80_USE_DEBUGLOG is the one backend that needs a third-party logger
+      # on the include path, so it gets its own job.
+      - name: Build BasicQuery against DebugLog
+        run: |
+          pio ci --lib=. --board=megaADK \
+            --project-option="build_flags=-Wall -Wextra -D PFTC80_USE_DEBUGLOG" \
+            --project-option="lib_deps=hideakitai/DebugLog@^0.8.4" \
+            examples/BasicQuery
+
+  lint:
+    name: Arduino Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      # Catches library.properties defects the Arduino Library Manager would
+      # reject on submission.
+      - uses: arduino/arduino-lint-action@v1
+        with:
+          library-manager: submit
+          compliance: strict

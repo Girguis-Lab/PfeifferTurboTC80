@@ -1,0 +1,194 @@
+#######################################
+# Syntax Coloring Map for PfeifferTurboTC80
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+PfeifferSerialTC80	KEYWORD1
+RS485Serial_Base	KEYWORD1
+RS485HardwareSerial	KEYWORD1
+PfeifferVacProtocol	KEYWORD1
+PfeifferTelegram	KEYWORD1
+BooleanOld	KEYWORD1
+BooleanNew	KEYWORD1
+UInteger	KEYWORD1
+UReal	KEYWORD1
+UShortInt	KEYWORD1
+UExpoNew	KEYWORD1
+String6	KEYWORD1
+String8	KEYWORD1
+String16	KEYWORD1
+ParameterDebugEntry	KEYWORD1
+DelayFunc	KEYWORD1
+TelegramError	KEYWORD1
+Action	KEYWORD1
+FuncOnOff	KEYWORD1
+FuncYesNo	KEYWORD1
+FuncMalfunctionAckn	KEYWORD1
+FuncPumpingStation	KEYWORD1
+FuncRotationSwitchpointCfg	KEYWORD1
+FuncOutputDO2Cfg	KEYWORD1
+FuncBackingPumpOpMode	KEYWORD1
+FuncGasMode	KEYWORD1
+FuncVentMode	KEYWORD1
+FuncAccA1Cfg	KEYWORD1
+FuncPress1HVen	KEYWORD1
+FuncOutputAO1Cfg	KEYWORD1
+FuncTmpMgtMode	KEYWORD1
+FuncCtrlVialnt	KEYWORD1
+FuncDI1Cfg	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+begin	KEYWORD2
+end	KEYWORD2
+task	KEYWORD2
+setAddress	KEYWORD2
+getAddress	KEYWORD2
+sendTelegramRaw	KEYWORD2
+sendTelegram	KEYWORD2
+printOutgoingTelegram	KEYWORD2
+sendQuery	KEYWORD2
+sendCommand	KEYWORD2
+receiveTelegramRaw	KEYWORD2
+receiveTelegram	KEYWORD2
+isValidResponse	KEYWORD2
+receiveBooleanOld	KEYWORD2
+receiveBooleanNew	KEYWORD2
+receiveUInteger	KEYWORD2
+receiveUReal	KEYWORD2
+receiveUShortInt	KEYWORD2
+receiveUExpoNew	KEYWORD2
+receiveString6	KEYWORD2
+receiveString8	KEYWORD2
+receiveString16	KEYWORD2
+queryLatestError	KEYWORD2
+queryErrorHistory	KEYWORD2
+enterSendMode	KEYWORD2
+enterReceiveMode	KEYWORD2
+ingestRxBytes	KEYWORD2
+rxOverflowCount	KEYWORD2
+flushInput	KEYWORD2
+availableForWrite	KEYWORD2
+encodeTelegram	KEYWORD2
+decodeTelegram	KEYWORD2
+printTelegramHumanReadable	KEYWORD2
+getParameterDebugEntry	KEYWORD2
+getHumanReadableErrorMessage	KEYWORD2
+setLogStream	KEYWORD2
+setLogLevel	KEYWORD2
+encode	KEYWORD2
+decode	KEYWORD2
+pfeifferDefaultDelay	KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+
+Heating	LITERAL1
+StandBy	LITERAL1
+RUTimeCtrl	LITERAL1
+ErrorAckn	LITERAL1
+PumpgStatn	LITERAL1
+EnableVent	LITERAL1
+CfgSpdSwPt	LITERAL1
+CfgDO2	LITERAL1
+MotorPump	LITERAL1
+CfgDO1	LITERAL1
+OpModeBKP	LITERAL1
+SpdSetMode	LITERAL1
+GasMode	LITERAL1
+VentMode	LITERAL1
+CfgAccA1	LITERAL1
+CfgAccB1	LITERAL1
+Press1HVen	LITERAL1
+SealingGas	LITERAL1
+CfgAO1	LITERAL1
+TmpMgtMode	LITERAL1
+CtrlVialnt	LITERAL1
+IntSelLckd	LITERAL1
+CfgDI1	LITERAL1
+CfgD12	LITERAL1
+CfgAccC1	LITERAL1
+CfgAccD1	LITERAL1
+RemotePrio	LITERAL1
+SpdSwPtAtt	LITERAL1
+ErrorCode	LITERAL1
+OvTempElec	LITERAL1
+OvTempPump	LITERAL1
+SetSpdAtt	LITERAL1
+PumpAccel	LITERAL1
+SetRotSpdHz	LITERAL1
+ActualSpdHz	LITERAL1
+DrvCurrent	LITERAL1
+OpHrsPump	LITERAL1
+FwVersion	LITERAL1
+DrvVoltage	LITERAL1
+OpHrsElec	LITERAL1
+NominalSpdHz	LITERAL1
+DrvPower	LITERAL1
+PumpCycles	LITERAL1
+TmpPwrStg	LITERAL1
+TempElec	LITERAL1
+TempPmpBot	LITERAL1
+AccelDecel	LITERAL1
+ElecName	LITERAL1
+HWVersion	LITERAL1
+SerialNo	LITERAL1
+ErrHist1	LITERAL1
+ErrHist2	LITERAL1
+ErrHist3	LITERAL1
+ErrHist4	LITERAL1
+ErrHist5	LITERAL1
+ErrHist6	LITERAL1
+ErrHist7	LITERAL1
+ErrHist8	LITERAL1
+ErrHist9	LITERAL1
+ErrHist10	LITERAL1
+TempRotor	LITERAL1
+OrderCode	LITERAL1
+AddID	LITERAL1
+SetRotSpdRpm	LITERAL1
+ActualSpdRpm	LITERAL1
+NominalSpdRpm	LITERAL1
+RUTimeSVal	LITERAL1
+SpdSwPt1	LITERAL1
+SpdSVal	LITERAL1
+PwrSVal	LITERAL1
+SwoffBKP	LITERAL1
+SwOnBKP	LITERAL1
+StdbySVal	LITERAL1
+SpdSwPt2	LITERAL1
+VentSpd	LITERAL1
+VentTime	LITERAL1
+mxPwrOutTm	LITERAL1
+fanOnTemp	LITERAL1
+PrsSwPt1	LITERAL1
+PrsSwPt2	LITERAL1
+PwrOutVolt	LITERAL1
+PwrOutThrs	LITERAL1
+PrsSn1Name	LITERAL1
+Pressure1	LITERAL1
+PrsCorrPi1	LITERAL1
+PrsSn2Name	LITERAL1
+Pressure2	LITERAL1
+PrsCorrPi2	LITERAL1
+NomSpdConf	LITERAL1
+RS485Adr	LITERAL1
+Pressure	LITERAL1
+CtrName	LITERAL1
+CtrSoftware	LITERAL1
+GaugeType	LITERAL1
+ParamSet	LITERAL1
+Servicelin	LITERAL1
+RS485_PIN_UNUSED	LITERAL1
+PFEIFFER_VAC_PROTOCOL_INCLUDE_DEBUG	LITERAL1
+PFTC80_USE_DEBUGLOG	LITERAL1
+PFTC80_LOG_TO_STREAM	LITERAL1
+TELEGRAM_MIN_LENGTH	LITERAL1
+TELEGRAM_MAX_LENGTH	LITERAL1
+PARAMETER_MAX	LITERAL1
