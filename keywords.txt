@@ -66,6 +66,15 @@ receiveUExpoNew	KEYWORD2
 receiveString6	KEYWORD2
 receiveString8	KEYWORD2
 receiveString16	KEYWORD2
+queryBooleanOld	KEYWORD2
+queryBooleanNew	KEYWORD2
+queryUInteger	KEYWORD2
+queryUReal	KEYWORD2
+queryUShortInt	KEYWORD2
+queryUExpoNew	KEYWORD2
+queryString6	KEYWORD2
+queryString8	KEYWORD2
+queryString16	KEYWORD2
 queryLatestError	KEYWORD2
 queryErrorHistory	KEYWORD2
 enterSendMode	KEYWORD2

@@ -317,15 +317,40 @@ String PfeifferSerialTC80::receiveString8(uint16_t expectedParameter, bool &isVa
 }
 
 // ===================================================================
+// Combined query and receive
+// ===================================================================
+
+// One overload per datatype. Each sends the query, gives the pump a moment to
+// turn the bus around, and decodes the reply with the matching receive*().
+#define PFTC80_DEFINE_QUERY(TYPE, RETURN_TYPE)                                                \
+    RETURN_TYPE PfeifferSerialTC80::query##TYPE(const uint16_t parameter, bool &isValid,       \
+                                                const bool debugPrint, unsigned long timeout) \
+    {                                                                                         \
+        sendQuery(parameter, debugPrint);                                                     \
+        _delayFunc(1); /* delay to avoid backtalk; honours the caller's delay hook */         \
+        return receive##TYPE(parameter, isValid, debugPrint, timeout);                        \
+    }
+
+PFTC80_DEFINE_QUERY(BooleanOld, boolean)      // 0: boolean_old
+PFTC80_DEFINE_QUERY(UInteger, unsigned long)  // 1: u_integer
+PFTC80_DEFINE_QUERY(UReal, float)             // 2: u_real
+PFTC80_DEFINE_QUERY(String6, String)          // 4: string (6 chars)
+PFTC80_DEFINE_QUERY(BooleanNew, boolean)      // 6: boolean_new
+PFTC80_DEFINE_QUERY(UShortInt, uint16_t)      // 7: u_short_int
+PFTC80_DEFINE_QUERY(UExpoNew, float)          // 10: u_expo_new
+PFTC80_DEFINE_QUERY(String16, String)         // 11: string16
+PFTC80_DEFINE_QUERY(String8, String)          // 12: string8
+
+#undef PFTC80_DEFINE_QUERY
+
+// ===================================================================
 // Error reporting
 // ===================================================================
 
 String PfeifferSerialTC80::queryLatestError(bool &isValid, bool debugPrint, unsigned long timeout)
 {
-    sendQuery(StatusRequest::ErrorCode, debugPrint);
-    _delayFunc(1); // delay to avoid backtalk; honours the caller's delay hook
-    String errMsg = receiveString6(StatusRequest::ErrorCode, isValid, debugPrint,
-                                   timeout / RECEIVE_ATTEMPTS_PER_TIMEOUT);
+    String errMsg = queryString6(StatusRequest::ErrorCode, isValid, debugPrint,
+                                 timeout / RECEIVE_ATTEMPTS_PER_TIMEOUT);
     if (!isValid)
         return String("");
 
@@ -342,9 +367,7 @@ String PfeifferSerialTC80::queryErrorHistory(bool &isValid, bool debugPrint, uns
     String errorMessages = "";
     for (int p = StatusRequest::ErrHist1; p <= StatusRequest::ErrHist10; p++)
     {
-        sendQuery(p, debugPrint);
-        _delayFunc(1); // delay to avoid backtalk; honours the caller's delay hook
-        String errCode = receiveString6(p, isValid, debugPrint, timeout / RECEIVE_ATTEMPTS_PER_TIMEOUT);
+        String errCode = queryString6(p, isValid, debugPrint, timeout / RECEIVE_ATTEMPTS_PER_TIMEOUT);
         if (!isValid)
         {
             errorMessages += "failed to query turbo error history,";

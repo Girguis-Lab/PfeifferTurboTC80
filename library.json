@@ -1,6 +1,6 @@
 {
   "name": "PfeifferTurboTC80",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Implements the Pfeiffer Vacuum Protocol over RS-485 serial for Pfeiffer turbomolecular pumps driven by a TC80 electronic drive unit allowing controling and reading parameters of the pump from arduino. It reqires an appropriate RS-485 to TTL converter with DE/RE direction control for Arduino compatibility. Not endorsed by or affiliated with Pfeiffer Vacuum.",
   "keywords": [
     "pfeiffer",

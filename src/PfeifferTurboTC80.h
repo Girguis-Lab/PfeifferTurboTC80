@@ -136,6 +136,25 @@ public:
     String receiveString16(uint16_t expectedParameter, bool &isValid, bool debugPrint = true, unsigned long timeout = 1000);
     String receiveString8(uint16_t expectedParameter, bool &isValid, bool debugPrint = true, unsigned long timeout = 1000);
 
+    // === Combined query and receive ===
+
+    /**
+     * Typed queries. Each sends the query for @p parameter and returns the
+     * pump's reply decoded to the native type of the parameter's datatype,
+     * saving the caller a paired sendQuery()/receive*(). Behave like the
+     * matching receive*() otherwise: @p isValid comes back false and the return
+     * value is zero/empty when no valid response arrived within @p timeout.
+     */
+    boolean queryBooleanOld(const uint16_t parameter, bool &isValid, const bool debugPrint = false, unsigned long timeout = 1000);
+    unsigned long queryUInteger(const uint16_t parameter, bool &isValid, const bool debugPrint = false, unsigned long timeout = 1000);
+    float queryUReal(const uint16_t parameter, bool &isValid, const bool debugPrint = false, unsigned long timeout = 1000);
+    String queryString6(const uint16_t parameter, bool &isValid, const bool debugPrint = false, unsigned long timeout = 1000);
+    boolean queryBooleanNew(const uint16_t parameter, bool &isValid, const bool debugPrint = false, unsigned long timeout = 1000);
+    uint16_t queryUShortInt(const uint16_t parameter, bool &isValid, const bool debugPrint = false, unsigned long timeout = 1000);
+    float queryUExpoNew(const uint16_t parameter, bool &isValid, const bool debugPrint = false, unsigned long timeout = 1000);
+    String queryString16(const uint16_t parameter, bool &isValid, const bool debugPrint = false, unsigned long timeout = 1000);
+    String queryString8(const uint16_t parameter, bool &isValid, const bool debugPrint = false, unsigned long timeout = 1000);
+
     // === Error reporting ===
 
     /**
